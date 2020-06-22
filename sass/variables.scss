@@ -1,0 +1,51 @@
+// Variables
+$color_one :   #fff;
+$color_two :   #343A40;
+$color_three : #f4623a;
+$color_four :  #8CC51A;
+
+
+// Mixin
+@mixin style-icons {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background-color: $color_three;
+    color: $color_one;
+    border-radius: 100%;
+    margin: 0 .2rem;
+    box-shadow: 0 .3rem .5rem 0 #ccc;
+    transition: all .3s ease;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $color_two;
+    } 
+}
+
+@mixin style-line {
+    border-bottom: 2px solid $color_three;
+    max-width: 5.25rem;
+    animation: loading 1s alternate 10 ease-in-out;
+
+    @keyframes loading {
+        0% {
+            transform: translateX(-160px);
+        }
+        100% {
+            transform: translateX(160px);
+        } 
+    }  
+}
+
+@mixin bg-image {
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    @media (min-width: 992px) {
+        background-position: center 50px;
+    }
+}

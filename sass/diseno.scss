@@ -1,0 +1,290 @@
+@import "variables.scss";
+
+// Codigo para eliminar espaciados de bootstrap
+h1, h2, h3, h4, h5, h6, ol, ul, p {
+  margin-bottom: 0;
+}
+
+// Codigo estilo de las lineas
+.linea-divisoria {
+  @include style-line();
+}
+
+// Menu de Navegacion
+nav {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  height: 72px;
+  padding: 0 .7rem;
+  background-color: $color_one;
+  box-shadow: 0 0 1rem 0 rgb(156, 153, 153);
+
+  @media (min-width: 992px) {
+    padding: 0 10rem;
+    box-shadow: none;
+  }
+
+  .content-nit { // Contenedor para uso de flex-box en full screem
+    display: flex;
+    justify-content: space-between;
+    height: 72px; // Misma altura que el Nav para el centrado vertical
+    align-items: center;
+
+    h3 {
+      color: $color_three;
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      margin-bottom: 2px;
+      
+      @media (min-width: 992px) {
+        font-size: 1.8rem;
+      }
+    }
+
+    .icons-socials {   
+      display: none;
+
+      @media (min-width: 992px) {
+        display: block;
+      }
+
+      i {
+        @include style-icons();
+      }
+    }
+
+    .icon-x {
+      cursor: pointer;
+      
+      @media (min-width: 992px) {
+        display: none;
+      }
+  
+      .line {
+        width: 28px;
+        height: 4px;
+        background-color: $color_two;
+        display: block;  // Imporatnte para mostrar el icono-x
+        border-radius: 10px; // Codigo para darle redondeado a las barras
+        transition: all .3s ease-in-out; // Velocidad del icon-x en transformarse
+  
+        &:nth-child(2) {
+          margin: 4px 0;  // Agregamos solamente margen a la linea-2
+        }
+      }
+    }  
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 0; // Eliminamos margenes de bootstrap
+    position: fixed; // Codigo para fijar y desplazar el menu de navegacion
+    width: 320px;
+    top: 72px; // Igual valor que la altura del Nav
+    z-index: 99;
+    height: 400px;
+    left: -100%; // Codigo para desaparecer el Menu de Navegacion
+    background-color: $color_two;
+    transition: all .4s ease-in-out;
+
+    &.menu-show { // Clase agregada con JQuery 
+      left: 0;
+    }
+    
+    @media (min-width: 992px) {
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      height: 40px;
+      box-shadow: 0 .1rem .5rem 0 rgb(63, 62, 62);
+    }
+
+    li {
+      padding: 1rem;
+      border-bottom: 1px solid $color_one;
+      transition: all .3s ease;
+
+      &:hover {
+        background-color: $color_one;
+      }
+      
+      @media (min-width: 992px) {
+        height: 40px;
+        line-height: 40px;
+        padding: 0 1rem;
+        border-bottom: none;
+      }
+      
+      .nav-link {
+        color: $color_one;
+        font-size: 0.9rem;
+        letter-spacing: .2rem;
+        
+        &:hover {
+          color: $color_three;
+        }
+        
+        &.active { // Clase agregada con JQuery
+          color: $color_three;
+        }
+
+        @media (min-width: 992px) {
+          padding: 0;
+        }
+      }    
+    }
+
+    .icons-socials {
+      display: flex;
+      justify-content: center;
+      height: 120px;
+      align-items: center;
+      background-color: $color_one;
+      border-bottom: 1px solid $color_three;
+
+      @media (min-width: 992px) {
+        display: none;
+      }
+
+      i {
+        @include style-icons();
+      }
+    }
+  }
+}
+
+
+// About
+.section-about {
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.746)), url(../img/img-1.jpg);
+  @include bg-image();
+  margin-top: 72px; // Codigo para recuperar la altura perdida por el fixed
+  color: $color_one;
+  text-align: center;
+  padding: 10rem 0; // Codigo para centrar contenido
+
+  .btn-design {
+    padding: 1.25rem 2.25rem;
+    margin-top: 2rem;
+    border-radius: 2rem;
+    background-color: $color_one;
+  
+    &:hover {
+      background-color: $color_four;
+      color: $color_one;
+    }
+  }     
+}
+
+
+// Services
+.section-services {
+  text-align: center;
+  padding: 10rem 0; // Codigo para centrar contenido
+
+  .services-flex {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 5rem;
+
+    div {
+      padding: 1rem;
+      
+      i {
+        color: $color_four;
+      }
+
+      h3 {
+        margin: 1rem 0;
+      }
+
+      p {
+        line-height: 1;
+      }
+    }
+  }
+}
+
+
+// Portafolio
+.section-galery {
+
+  .portafolio-flex {
+    display: flex;
+    flex-wrap: wrap;
+
+    div {
+      
+      .content-portfolio {
+        position: relative;
+        display: block; // Imporatnte para que la mascara tome el 100% de altura del padre
+        cursor: pointer;
+
+        .content-mask {
+          position: absolute; // Codigo para posicionar la mascara
+          width: 100%;
+          display: flex;
+          flex-direction: column;;
+          align-items: center;
+          height: 100%;
+          justify-content: center;
+          background: fade-out($color_two, .5);
+          color: $color_one;
+          border-bottom: 2px solid $color_three;
+          opacity: 0; // Codigo que desaparece la mascara
+          transition: all 0.25s ease;
+
+          &:hover {   
+            opacity: 1; // Codigo que muestra la mascara la hacer hover
+          }
+        }  
+      }
+    }
+  }
+}
+
+
+// Cotactos 
+.section-contact {
+  padding: 10rem 0;
+  text-align: center;
+
+  .contact-flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 5rem;
+  }
+}
+
+
+// Footer
+footer {
+  text-align: center;
+  background-color: $color_two;
+
+  .btn-top {
+    position: relative;  
+    bottom: 25px;
+    
+    i {
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+      font-size: 1.6rem;
+      border-radius: 100%;
+      background-color: $color_two; // Importante para mostrar el Go-top al hacer scroll
+      color: $color_one;
+      cursor: pointer;
+    }
+  }
+
+  h6 {
+    padding-bottom: 33px;
+  }
+}
